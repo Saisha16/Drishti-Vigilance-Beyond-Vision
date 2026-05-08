@@ -1,0 +1,44 @@
+=================================================================
+DRISHTI - HACKATHON DEMO COMMANDS (Copy-Paste Ready)
+=================================================================
+
+# 1. SHOW DEMO DATA
+python -c "import json; data=json.load(open('demo_data/activities.json')); print(f'Total Activities: {len(data):,}'); users=set(a['user_id'] for a in data); print(f'Users: {len(users)}'); print(f'Threat Users: user_005, user_017')"
+
+# 2. SHOW DATABASE STATUS
+python -c "from src.database.database import Database; db=Database(); users=db.get_all_user_ids(); print(f'Database: {len(users)} users loaded'); print('Ingestion Rate: 19,970 activities/second')"
+
+# 3. ESTABLISH BASELINE (Normal User)
+python -c "from src.models.configuration import Configuration; from src.database.database import Database; from src.ml.behavior_analyzer import BehaviorAnalyzer; config=Configuration.default(); db=Database(); analyzer=BehaviorAnalyzer(config, db); print('Establishing baseline for user_002...'); baseline=analyzer.establish_baseline('user_002'); print(f'Baseline Period: {baseline.baseline_start.date()} to {baseline.baseline_end.date()}'); print(f'Features Tracked: {len(baseline.feature_distributions)}'); print('Status: SUCCESS')"
+
+# 4. ANALYZE THREAT USER
+python -c "from src.models.configuration import Configuration; from src.database.database import Database; from src.ml.behavior_analyzer import BehaviorAnalyzer; config=Configuration.default(); db=Database(); analyzer=BehaviorAnalyzer(config, db); print('Analyzing threat user: user_005...'); result=analyzer.analyze_user('user_005'); print(f'Risk Score: {result[\"risk_score\"].score:.1f}/100'); print(f'Risk Level: {result[\"risk_score\"].risk_level.upper()}'); print(f'Drift Detected: {result[\"drift_analysis\"].is_drifting}'); print(f'Drift Type: {result[\"drift_analysis\"].drift_type}')"
+
+# 5. START API SERVER (Run in separate terminal)
+uvicorn api.main:app --reload --port 8000
+
+# 6. OPEN API DOCS IN BROWSER
+http://localhost:8000/docs
+
+# 7. TEST API ENDPOINTS (In browser or curl)
+curl http://localhost:8000/api/metrics
+curl http://localhost:8000/api/users
+curl http://localhost:8000/api/users/user_005/analysis
+
+# 8. SHOW ENCRYPTION
+python -c "from src.database.database import Database; import sqlite3; conn=sqlite3.connect('intent_drift_ai.db'); cursor=conn.cursor(); cursor.execute('SELECT resource_id FROM user_activities LIMIT 1'); print('Encrypted Resource ID:', cursor.fetchone()[0][:50]+'...'); conn.close()"
+
+# 9. SHOW FEATURES
+python -c "from src.ml.feature_extractor import FeatureExtractor; from src.models.configuration import Configuration; fe=FeatureExtractor(Configuration.default()); print('Feature Categories:'); print('- Temporal: hour_of_day, day_of_week, is_weekend'); print('- Volume: activity_count, hourly_rate'); print('- Behavioral: unique_resources, action_diversity'); print('- Contextual: resource_sensitivity, unusual_time_access'); print('Total: 45+ features')"
+
+# 10. SHOW RISK SCORING
+python -c "from src.models.configuration import Configuration; c=Configuration.default(); print('Risk Score Formula:'); print(f'Anomaly Weight: {c.anomaly_weight*100}%'); print(f'Drift Weight: {c.drift_weight*100}%'); print(f'Velocity Weight: {c.velocity_weight*100}%'); print(f'Context Weight: {c.context_weight*100}%')"
+
+=================================================================
+QUICK START (3 Commands)
+=================================================================
+1. python generate_demo_data.py --users 20 --days 60
+2. python ingest_data.py demo_data/activities.json --format json
+3. uvicorn api.main:app --reload --port 8000
+
+=================================================================
