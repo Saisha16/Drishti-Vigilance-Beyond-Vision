@@ -2,81 +2,56 @@
 
 **Tagline:** *Vigilance Beyond Vision*
 
-Drishti is an advanced insider threat detection system that uses machine learning to identify malicious intent before damage occurs. It analyzes behavioral patterns, detects drift, and generates explainable alerts for security teams.
+Drishti is an advanced insider threat detection system that uses machine learning to identify malicious intent before damage occurs. It features a Python ML backend with FastAPI and a React frontend with a futuristic cybersecurity dashboard.
 
 ---
 
-## 🎯 Key Features
+## �️ Full Stack Architecture
 
-- ** ML-Powered Detection**: 6-component pipeline with Isolation Forest baseline modeling
-- ** 45+ Behavioral Features**: Temporal, volume, behavioral, and contextual analysis
-- ** Drift Detection**: Mann-Kendall statistical test for gradual, sudden, and oscillating changes
-- ** Multi-Factor Risk Scoring**: Combines anomaly, drift, velocity, and context (0-100 scale)
-- ** Explainable AI**: Human-readable alerts with risk factors and recommendations
-- ** AES-256 Encryption**: Secure data storage with encrypted user IDs and resource IDs
-- ** Real-Time Monitoring**: FastAPI backend with 11 REST endpoints
-- ** Visualization Ready**: 6 Plotly chart types for dashboards
+### Backend (Python + FastAPI)
+- **ML-Powered Detection**: 6-component pipeline with Isolation Forest baseline modeling
+- **45+ Behavioral Features**: Temporal, volume, behavioral, and contextual analysis
+- **Drift Detection**: Mann-Kendall statistical test for gradual, sudden, and oscillating changes
+- **Multi-Factor Risk Scoring**: Combines anomaly, drift, velocity, and context (0-100 scale)
+- **Explainable AI**: Human-readable alerts with risk factors and recommendations
+- **AES-256 Encryption**: Secure data storage with encrypted user IDs and resource IDs
+- **11 REST API Endpoints**: Complete API for frontend integration
+
+### Frontend (React + Vite + Tailwind)
+- **Futuristic Dashboard**: Modern cybersecurity interface
+- **Real-time Monitoring**: Live threat visualization
+- **Interactive Charts**: Recharts-powered data visualization
+- **Responsive Design**: Tailwind CSS styling
+- **Component Library**: Radix UI components
 
 ---
 
-## 🏗️ Architecture
+## 🚀 Quick Start
 
+### Backend Setup
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Setup database with demo data
+python seed_database.py
+
+# Start API server
+uvicorn api.main:app --reload --port 8000
 ```
-┌─────────────────────────────────────────────────────────┐
-│                   PRESENTATION LAYER                    │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Frontend (React + Tailwind + Recharts)          │  │
-│  │  - Dashboard, User Analysis, Alerts, Overview    │  │
-│  └──────────────────────────────────────────────────┘  │
-│                         ↕ HTTP/REST                     │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  API Layer (FastAPI)                             │  │
-│  │  - 11 REST endpoints                             │  │
-│  │  - CORS middleware                               │  │
-│  │  - WebSocket support                             │  │
-│  └──────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────┘
-                         ↕
-┌─────────────────────────────────────────────────────────┐
-│                  BUSINESS LOGIC LAYER                   │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Analysis Pipeline                               │  │
-│  │  - ingest_activities()                           │  │
-│  │  - establish_baselines_for_all_users()           │  │
-│  │  - analyze_user()                                │  │
-│  │  - run_daily_analysis()                          │  │
-│  └──────────────────────────────────────────────────┘  │
-│                         ↕                               │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  ML Components                                   │  │
-│  │  ┌────────────────┐  ┌────────────────┐         │  │
-│  │  │FeatureExtractor│→ │BaselineModeler │         │  │
-│  │  └────────────────┘  └────────────────┘         │  │
-│  │          ↓                    ↓                  │  │
-│  │  ┌────────────────┐  ┌────────────────┐         │  │
-│  │  │ DriftDetector  │→ │  RiskScorer    │         │  │
-│  │  └────────────────┘  └────────────────┘         │  │
-│  │          ↓                    ↓                  │  │
-│  │  ┌────────────────┐  ┌────────────────┐         │  │
-│  │  │AlertGenerator  │  │BehaviorAnalyzer│         │  │
-│  │  └────────────────┘  └────────────────┘         │  │
-│  └──────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────┘
-                         ↕
-┌─────────────────────────────────────────────────────────┐
-│                   DATA ACCESS LAYER                     │
-│  ┌──────────────────────────────────────────────────┐  │
-│  │  Database (SQLite + AES-256 Encryption)          │  │
-│  │  - user_activities                               │  │
-│  │  - behavioral_baselines                          │  │
-│  │  - risk_scores                                   │  │
-│  │  - alerts                                        │  │
-│  │  - alert_notes                                   │  │
-│  │  - audit_log                                     │  │
-│  │  - configuration                                 │  │
-│  └──────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────┘
+
+**API Documentation:** http://localhost:8000/docs
+
+### Frontend Setup
+```bash
+# Install Node dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
+
+**Frontend:** http://localhost:5173
 
 ---
 
@@ -103,24 +78,7 @@ uvicorn api.main:app --reload --port 8000
 
 ---
 
-## 🚀 Quick Start (3 Commands)
-
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Setup database with demo data
-python seed_database.py
-
-# 3. Start API server
-uvicorn api.main:app --reload --port 8000
-```
-
-**API Documentation:** http://localhost:8000/docs
-
----
-
-## 📊 Key Metrics
+##  Key Metrics
 
 | Metric | Value | Description |
 |--------|-------|-------------|
@@ -133,41 +91,7 @@ uvicorn api.main:app --reload --port 8000
 
 ---
 
-## 🔧 Installation
-
-### Prerequisites
-- Python 3.8+
-- pip
-
-### Setup
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/drishti-vigilance-beyond-vision.git
-cd drishti-vigilance-beyond-vision
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Generate demo data (100 users, 10 threats, 150K+ activities)
-python generate_demo_data.py --output-dir demo_data
-
-# Ingest data into database
-python ingest_data.py demo_data/activities.json --format json
-
-# Establish behavioral baselines
-python -c "from src.analysis_pipeline import *; from src.models.configuration import *; from src.database.database import *; pipeline = AnalysisPipeline(Configuration.default(), Database('intent_drift_ai.db', encryption_enabled=True)); pipeline.establish_baselines_for_all_users()"
-
-# Run initial analysis
-python -c "from src.analysis_pipeline import *; from src.models.configuration import *; from src.database.database import *; pipeline = AnalysisPipeline(Configuration.default(), Database('intent_drift_ai.db', encryption_enabled=True)); pipeline.run_daily_analysis()"
-
-# Start API server
-uvicorn api.main:app --reload --port 8000
-```
-
----
-
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Dashboard & Metrics
 - `GET /api/metrics` - Dashboard metrics (total users, active alerts, avg risk score)
@@ -319,31 +243,14 @@ console.log(analysis.alert.summary); // "CRITICAL insider threat detected..."
 
 ---
 
-## 🧪 Testing
-
-```bash
-# Test data generation
-python generate_demo_data.py --users 10 --days 30
-
-# Test data ingestion
-python ingest_data.py demo_data/activities.json
-
-# Test API endpoints
-curl http://localhost:8000/api/metrics
-curl http://localhost:8000/api/users
-curl http://localhost:8000/api/alerts
-```
-
----
-
 ## 📚 Project Structure
 
 ```
 drishti-vigilance-beyond-vision/
-├── api/
+├── api/                        # Backend API
 │   ├── __init__.py
 │   └── main.py                 # FastAPI application (11 endpoints)
-├── src/
+├── src/                        # Backend ML Pipeline
 │   ├── __init__.py
 │   ├── analysis_pipeline.py    # Main orchestration layer
 │   ├── database/
@@ -365,63 +272,14 @@ drishti-vigilance-beyond-vision/
 │       ├── __init__.py
 │       ├── activity_parser.py  # JSON/CSV/Syslog parsers
 │       └── config_parser.py    # YAML/JSON config parsers
+├── src/app/                    # Frontend React Application
+│   └── ...                     # React components
 ├── generate_demo_data.py       # Synthetic data generator
 ├── ingest_data.py              # Data ingestion script
 ├── seed_database.py            # One-command setup
 ├── requirements.txt            # Python dependencies
+├── package.json                # Node dependencies
 └── README.md                   # This file
-```
-
----
-
-## 🔄 Workflow
-
-### 1. Data Ingestion
-```
-Activity Logs → Parser → Database (Encrypted)
-```
-
-### 2. Baseline Establishment
-```
-Historical Activities → Feature Extraction → Isolation Forest → Baseline Model
-```
-
-### 3. Daily Analysis
-```
-Recent Activities → Feature Extraction → Anomaly Detection
-                                      ↓
-                              Drift Detection
-                                      ↓
-                              Risk Scoring
-                                      ↓
-                              Alert Generation (if score ≥ 70)
-```
-
-### 4. Alert Management
-```
-Alert → Analyst Review → Status Update → Resolution
-```
-
----
-
-## ⚙️ Configuration
-
-Edit `src/models/configuration.py` or use API endpoint:
-
-```python
-{
-    "drift_threshold": 0.15,           # Drift detection sensitivity
-    "temporal_window_days": 30,        # Analysis window
-    "baseline_minimum_days": 30,       # Minimum baseline period
-    "alert_threshold": 70.0,           # Alert generation threshold
-    "critical_threshold": 80.0,        # Critical alert threshold
-    "resource_sensitivity_weights": {
-        "classified_documents": 1.0,
-        "source_code": 0.8,
-        "customer_data": 0.9,
-        ...
-    }
-}
 ```
 
 ---
