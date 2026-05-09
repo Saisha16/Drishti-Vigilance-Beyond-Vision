@@ -1,5 +1,4 @@
 services:
-  # 1. Backend API Service
   - type: web
     name: drishti-api
     env: python
@@ -11,9 +10,9 @@ services:
       - key: DRISHTI_ENCRYPTION_KEY
         generateValue: true
       - key: DATABASE_PATH
-        value: ./intent_drift_ai.db
+        value: intent_drift_ai.db
 
-staticSites:
+static_sites:
   - name: drishti-frontend
     buildCommand: npm install && npm run build
     publishDir: dist
@@ -23,4 +22,4 @@ staticSites:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        value: https://drishti-api.onrender.com # Placeholder - User can update after backend is live
+        value: https://drishti-api.onrender.com
