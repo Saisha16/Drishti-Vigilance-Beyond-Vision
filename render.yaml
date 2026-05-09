@@ -1,0 +1,35 @@
+services:
+  # 1. Backend API Service
+  - type: web
+    name: drishti-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: DRISHTI_ENCRYPTION_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /data/intent_drift_ai.db
+    disk:
+      name: drishti-db-storage
+      mountPath: /data
+      sizeGB: 1
+
+  # 2. Frontend UI Service
+  - type: static
+    name: drishti-frontend
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: drishti-api
+          property: host

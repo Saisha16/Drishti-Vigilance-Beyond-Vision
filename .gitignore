@@ -1,3 +1,8 @@
+node_modules/
+dist/
+.env*
+*.log
+
 # Python
 __pycache__/
 *.py[cod]
@@ -55,3 +60,18 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.bak
+
+# Project Documentation (Internal/Demo)
+CHEAT_SHEET.txt
+DEMO_COMMANDS.txt
+DEMO_SCRIPT.md
+DRISHTI_INDIA_RESEARCH.md
+NAN_HANDLING_INTEGRATION_COMPLETE.md
+SYSTEM_STATUS.md
+TALKING_POINTS.md
+TASK_4_IMPLEMENTATION_SUMMARY.md
+ATTRIBUTIONS.md
+SERVERS_RUNNING.md
+.kiro/
+.pytest_cache/
+tests/EXPLORATION_RESULTS.md
