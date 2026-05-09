@@ -11,13 +11,8 @@ services:
       - key: DRISHTI_ENCRYPTION_KEY
         generateValue: true
       - key: DATABASE_PATH
-        value: /data/intent_drift_ai.db
-    disks:
-      - name: drishti-db-storage
-        mountPath: /data
-        sizeGB: 1
+        value: ./intent_drift_ai.db
 
-# 2. Frontend UI Service (Static Sites have their own section)
 staticSites:
   - name: drishti-frontend
     buildCommand: npm install && npm run build
@@ -28,7 +23,4 @@ staticSites:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: drishti-api
-          property: url
+        value: https://drishti-api.onrender.com # Placeholder - User can update after backend is live
