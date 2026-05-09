@@ -12,17 +12,16 @@ services:
         generateValue: true
       - key: DATABASE_PATH
         value: /data/intent_drift_ai.db
-    disk:
-      name: drishti-db-storage
-      mountPath: /data
-      sizeGB: 1
+    disks:
+      - name: drishti-db-storage
+        mountPath: /data
+        sizeGB: 1
 
   # 2. Frontend UI Service
   - type: static
     name: drishti-frontend
-    env: static
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    publishDir: dist
     routes:
       - type: rewrite
         source: /*
@@ -32,4 +31,4 @@ services:
         fromService:
           type: web
           name: drishti-api
-          property: host
+          property: url
