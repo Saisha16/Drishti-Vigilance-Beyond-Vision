@@ -1,3 +1,4 @@
+version: 1
 services:
   - type: web
     name: drishti-api
@@ -11,11 +12,9 @@ services:
       - key: DRISHTI_ENCRYPTION_KEY
         generateValue: true
 
-staticSites:
-  - name: drishti-frontend
+  - type: web
+    name: drishti-frontend
+    env: static
+    plan: free
     buildCommand: npm install && npm run build
-    publishDir: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+    staticPublishPath: dist
