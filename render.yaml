@@ -17,9 +17,9 @@ services:
         mountPath: /data
         sizeGB: 1
 
-  # 2. Frontend UI Service
-  - type: static_site
-    name: drishti-frontend
+# 2. Frontend UI Service (Static Sites have their own section)
+staticSites:
+  - name: drishti-frontend
     buildCommand: npm install && npm run build
     publishDir: dist
     routes:
