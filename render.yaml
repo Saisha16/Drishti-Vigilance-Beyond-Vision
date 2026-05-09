@@ -13,10 +13,10 @@ services:
       - key: DATABASE_PATH
         value: intent_drift_ai.db
 
-  - type: static
-    name: drishti-frontend
+static_sites:
+  - name: drishti-frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    publishDir: dist
     routes:
       - type: rewrite
         source: /*
