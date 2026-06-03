@@ -1,6 +1,7 @@
 """
 Data Ingestion Script
 Ingests activity logs into database
+Data Layer
 """
 import argparse
 from src.parsers.activity_parser import ActivityParser
