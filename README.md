@@ -126,5 +126,4 @@ npm run dev
 *   The system uses PBKDF2 with 100,000 iterations for key derivation.
 *   Immutable audit logging ensures analyst accountability.
 
-## License
-MIT License. See LICENSE for details.
+
